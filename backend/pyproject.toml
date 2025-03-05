@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "chunk-norris"
+version = "0.1.0"
+description = ""
+authors = ["Jacob Poling <polingj999@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.1.0"
+flask-smorest = "^0.45.0"
+dotenv = "^0.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

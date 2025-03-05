@@ -1,0 +1,7 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5120:5000"
+    volumes:
+      - ./backend:/api
