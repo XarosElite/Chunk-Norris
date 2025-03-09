@@ -4,6 +4,8 @@
 import traceback
 
 from flask import Flask, send_from_directory
+
+import app.models
 from werkzeug.exceptions import default_exceptions
 
 from app.routes import api_routes
@@ -11,6 +13,7 @@ from app.common.errors import ServerException
 # from app.common.logger import configure_logger, log_details
 from app.common.utility import create_server_res
 from config import get_environment
+from app.extensions import db, migrate
 
 
 def create_app(config=get_environment()):
@@ -23,10 +26,16 @@ def create_app(config=get_environment()):
     app.config.from_object(config)
     register_error_routes(app)
     register_frontend(app)
+    
+    # Initialize Database
+    db.init_app(app)
+    db.app = app
 
+    migrate.init_app(app, db, compare_type=True)
+    with app.app_context():
+        db.create_all()
     # Configure logger
     # configure_logger(app)
-
     return app
 
 

@@ -5,3 +5,15 @@ services:
       - "5120:5000"
     volumes:
       - ./backend:/api
+  db:
+    image: postgres:latest
+    restart: always
+    env_file:
+      ./backend/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data 
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
